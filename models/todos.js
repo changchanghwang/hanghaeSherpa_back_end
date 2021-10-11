@@ -1,32 +1,59 @@
-'use strict';
-const { Model } = require('sequelize');
-module.exports = (sequelize, DataTypes) => {
-  class Todo extends Model {
-    /**
-     * Helper method for defining associations.
-     * This method is not a part of Sequelize lifecycle.
-     * The `models/index` file will call this method automatically.
-     */
-    static associate(models) {
-      // define association here
-      Todo.hasMany(models.User, {
-        foreignKey: 'user',
-      });
-    }
+const Sequelize = require('sequelize');
+
+module.exports = class Todo extends Sequelize.Model {
+  static init(sequelize) {
+    return super.init(
+      {
+        id: {
+          allowNull: false,
+          autoIncrement: true,
+          primaryKey: true,
+          type: Sequelize.INTEGER,
+        },
+        perfection: {
+          type: Sequelize.INTEGER,
+          allowNull: false,
+        },
+        creativity: {
+          type: Sequelize.INTEGER,
+          allowNull: false,
+        },
+        difficulty: {
+          type: Sequelize.INTEGER,
+          allowNull: false,
+        },
+        concentration: {
+          type: Sequelize.INTEGER,
+          allowNull: false,
+        },
+        satisfaction: {
+          type: Sequelize.INTEGER,
+          allowNull: false,
+        },
+        date: {
+          type: Sequelize.STRING(40),
+          allowNull: false,
+        },
+      },
+      //sequelize 옵션
+      {
+        sequelize,
+        timestamps: false,
+        underscored: false,
+        modelName: 'Todo',
+        tableName: 'todos',
+        paranoid: false,
+        charset: 'utf8',
+        collate: 'utf8_general_ci',
+      }
+    );
   }
-  Todo.init(
-    {
-      perfection: DataTypes.INTEGER,
-      creativity: DataTypes.INTEGER,
-      difficulty: DataTypes.INTEGER,
-      concentration: DataTypes.INTEGER,
-      satisfaction: DataTypes.INTEGER,
-      date: DataTypes.STRING,
-    },
-    {
-      sequelize,
-      modelName: 'Todo',
-    }
-  );
-  return Todo;
+  static associate(db) {
+    //user와 1:n 관계중 n
+    db.Todo.belongsTo(db.User, {
+      foreignKey: 'user',
+      targetKey: 'id',
+      onDelete: 'CASCADE',
+    });
+  }
 };

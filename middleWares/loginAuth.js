@@ -10,16 +10,15 @@ module.exports = async (req, res, next) => {
     try {
       const decoded = jwt.verify(cookie, process.env.SECRET_KEY);
 
-      const user = await User.findOne({ 
-          where : { userId: decoded.userId } 
-        });
+      const user = await User.findOne({
+        where: { userId: decoded.userId },
+      });
 
       res.locals.user = user.userId;
 
       console.log('로컬 유저는?', res.locals.user);
-      
-      next();
 
+      next();
     } catch (error) {
       res.status(400).send({});
     }

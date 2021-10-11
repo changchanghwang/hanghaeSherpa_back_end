@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const { users } = require('../models');
-const bcrypt = requrie('bcrypt');
+const bcrypt = require('bcrypt');
 const {
   idValidation,
   passwordValidation,
@@ -40,8 +40,6 @@ router.post('/signup', async (req, res, next) => {
   }
 });
 
-
-
 //로그인
 router.post('/login', async (req, res) => {
   const { userId, password } = await postLoginSchema.validateAsync(req.body);
@@ -60,6 +58,5 @@ router.post('/login', async (req, res) => {
   });
   res.status(200).json({});
 });
-
 
 module.exports = router;

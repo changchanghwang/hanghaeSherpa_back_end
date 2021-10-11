@@ -6,16 +6,17 @@ module.exports = {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
       },
-      user:{
-        type:Sequelize.INTEGER,
+      user: {
+        type: Sequelize.INTEGER,
         allowNull: false,
-        ondDelte:'CASCADE',
-        references:{
-          model: "users",
-          key: "id",
-        }
+        //시퀄라이즈 관계설정
+        ondDelte: 'CASCADE',
+        references: {
+          model: 'users',
+          key: 'id',
+        },
       },
       perfection: {
         type: Sequelize.INTEGER,
@@ -45,5 +46,5 @@ module.exports = {
   },
   down: async (queryInterface, Sequelize) => {
     await queryInterface.dropTable('todos');
-  }
+  },
 };

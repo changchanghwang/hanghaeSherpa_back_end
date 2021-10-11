@@ -10,11 +10,17 @@ router.post('/signup', async (req, res, next) => {
       password,
     },
   });
-  if (!userExist) {
-    await users.create({ nickname, userId, password });
-    res.status(200).json({});
-  } else {
-    res.status(400).json({});
+  try {
+    if (!userExist) {
+      await users.create({ nickname, userId, password });
+      res.status(200).json({});
+    } else if (userExist) {
+      res.status(400).json({
+        errorMessage: '중복아이디입니다.',
+      });
+    }
+  } catch (err) {
+    console.error(err);
   }
 });
 

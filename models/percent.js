@@ -1,9 +1,7 @@
 'use strict';
-const {
-  Model
-} = require('sequelize');
+const { Model } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
-  class percent extends Model {
+  class Percent extends Model {
     /**
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
@@ -11,19 +9,22 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      percent.hasMany(models.users,{
-        foreignKey:"user",
+      Percent.hasMany(models.User, {
+        foreignKey: 'user',
       });
-      percent.hasMany(models.todos,{
-        foreignKey:"todo",
-      })
+      Percent.hasMany(models.Todo, {
+        foreignKey: 'todo',
+      });
     }
-  };
-  percent.init({
-    totalPercent: DataTypes.STRING
-  }, {
-    sequelize,
-    modelName: 'percent',
-  });
-  return percent;
+  }
+  Percent.init(
+    {
+      totalPercent: DataTypes.STRING,
+    },
+    {
+      sequelize,
+      modelName: 'Percent',
+    }
+  );
+  return Percent;
 };

@@ -11,6 +11,12 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      percent.hasMany(models.users,{
+        foreignKey:"user",
+      });
+      percent.hasMany(models.todos,{
+        foreignKey:"todo",
+      })
     }
   };
   percent.init({

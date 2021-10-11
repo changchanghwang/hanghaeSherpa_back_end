@@ -1,0 +1,7 @@
+node_modules
+.env
+.idea
+coverage
+.vscode
+jest.config.js
+config

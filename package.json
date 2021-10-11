@@ -1,0 +1,33 @@
+{
+  "name": "hanghaesherpa_back_end",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "dependencies": {
+    "bcrypt": "^5.0.1",
+    "cookie-parser": "^1.4.5",
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "joi": "^17.4.2",
+    "morgan": "^1.10.0",
+    "mysql2": "^2.3.0",
+    "sequelize": "^6.7.0"
+  },
+  "devDependencies": {
+    "jest": "^27.2.5",
+    "sequelize-cli": "^6.2.0"
+  },
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/changchanghwang/hanghaeSherpa_back_end.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/changchanghwang/hanghaeSherpa_back_end/issues"
+  },
+  "homepage": "https://github.com/changchanghwang/hanghaeSherpa_back_end#readme"
+}

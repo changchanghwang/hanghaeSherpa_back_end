@@ -7,7 +7,7 @@ module.exports = {
       .required()
       .min(4)
       .max(12)
-      .pattern(/^[a-zA-Z0-9]{4,12}$/),
+      .pattern(/^[a-zA-Z0-9!@#$%^&*]{4,12}$/),
     nickname: Joi.string()
       .required()
       .min(1)
@@ -17,7 +17,7 @@ module.exports = {
       .required()
       .min(6)
       .max(18)
-      .pattern(/^[a-zA-Z0-9]{6,18}$/),
+      .pattern(/^[a-zA-Z0-9!@#$%^&*]{6,18}$/),
     passwordCheck: Joi.ref('password'),
   }),
 };

@@ -1,4 +1,4 @@
-const express = require('express')
+const express = require('express');
 const app = express();
 const Http = require('http');
 const http = Http.createServer(app);
@@ -12,6 +12,6 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(express.static('public'));
 
-app.use('/', router)
+app.use('/', router);
 
 module.exports = http;

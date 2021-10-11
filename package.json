@@ -15,9 +15,11 @@
   },
   "devDependencies": {
     "jest": "^27.2.5",
+    "prettier": "^2.4.1",
     "sequelize-cli": "^6.2.0"
   },
   "scripts": {
+    "prettify": "prettier --write *.js **/*.js",
     "test": "jest"
   },
   "repository": {

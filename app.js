@@ -15,6 +15,7 @@ sequelize
 
 //morgan
 app.use(morgan('dev'));
+
 //cors
 app.use(cors());
 

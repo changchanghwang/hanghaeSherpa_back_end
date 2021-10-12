@@ -1,16 +1,20 @@
 const { signUpSchema } = require('../routers/joi');
+const moment = require('moment');
+const {
+  idValidation,
+  passwordValidation,
+} = require('../routers/controllers/signupValidation');
+const bcrypt = require('bcrypt');
+const saltRounds = 10;
+const { User } = require('../models');
 
 module.exports = {
   signup: async (req, res, next) => {
     //각 변수를 req.body로 받음
     const { nickname, userId, password, passwordCheck } =
       await signUpSchema.validateAsync(req.body);
-    //년,월,일을 각각 구해서 원하는 모양으로 가공
-    const today = new Date();
-    const year = today.getFullYear();
-    const month = today.getMonth() + 1;
-    const day = today.getDate();
-    const date = `${year}-${month}-${day}`;
+    //년,월,일을 원하는 format으로 가공
+    const date = moment().format('YYYY-MM-DD');
     //idValidation과 passwordValidation에 성공한다면 둘다 true를 반환
     if (
       idValidation(userId) &&

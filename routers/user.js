@@ -1,14 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const { User } = require('../models');
-const bcrypt = require('bcrypt');
-const {
-  idValidation,
-  passwordValidation,
-} = require('./controller/signupValidation');
-const saltRounds = 10;
-const { signUpSchema, idCheckSchema, nicknameSchema } = require('./joi');
-const { idCheck, nicknameCheck } = require('./controller/Checks');
+const { idCheck, nicknameCheck } = require('./controllers/Checks');
 const { signup } = require('../services/signup');
 
 //회원가입
@@ -27,10 +20,9 @@ router.post('/login', async (req, res) => {
     where: { userId, password },
   });
   if (!user) {
-    res.status(400).send({});
-    return;
+    return res.status(400).send({});
   }
-  const token = jwt.sign({ userId: user.userId }, process.env.SECRET_KEY);
+  const token = jwt.sign({ userId }, process.env.SECRET_KEY);
   console.log(token);
   res.cookie('user', token, {
     maxAge: 50 * 60 * 1000,

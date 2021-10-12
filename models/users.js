@@ -1,27 +1,58 @@
-'use strict';
-const { Model } = require('sequelize');
-module.exports = (sequelize, DataTypes) => {
-  class User extends Model {
-    /**
-     * Helper method for defining associations.
-     * This method is not a part of Sequelize lifecycle.
-     * The `models/index` file will call this method automatically.
-     */
-    static associate(models) {
-      // define association here
-    }
+const Sequelize = require('sequelize');
+
+module.exports = class User extends Sequelize.Model {
+  static init(sequelize) {
+    return super.init(
+      {
+        id: {
+          allowNull: false,
+          autoIncrement: true,
+          primaryKey: true,
+          unique: true,
+          type: Sequelize.INTEGER,
+        },
+        userId: {
+          type: Sequelize.STRING(50),
+          allowNull: false,
+          unique: true,
+        },
+        password: {
+          type: Sequelize.STRING(200),
+          allowNull: false,
+        },
+        nickname: {
+          type: Sequelize.STRING(80),
+          allowNull: false,
+        },
+        date: {
+          type: Sequelize.STRING(40),
+          allowNull: false,
+        },
+      },
+      {
+        sequelize,
+        timestamps: false,
+        underscored: false,
+        modelName: 'User',
+        tableName: 'users',
+        paranoid: false,
+        charset: 'utf8',
+        collate: 'utf8_general_ci',
+      }
+    );
   }
-  User.init(
-    {
-      userId: DataTypes.STRING,
-      date: DataTypes.STRING,
-      nickname: DataTypes.STRING,
-      password: DataTypes.STRING,
-    },
-    {
-      sequelize,
-      modelName: 'User',
-    }
-  );
-  return User;
+  static associate(db) {
+    //Todo와 1대 N의 관계 중 1의 관계
+    db.User.hasMany(db.Todo, {
+      foreignKey: 'user',
+      sourceKey: 'id',
+      onDelte: 'CASCADE',
+    });
+    //Percent와 1대 M의 관계중 1의 관계
+    db.User.hasMany(db.Percent, {
+      foreignKey: 'user',
+      sourceKey: 'id',
+      onDelte: 'CASCADE',
+    });
+  }
 };

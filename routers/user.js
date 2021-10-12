@@ -7,92 +7,23 @@ const {
   passwordValidation,
 } = require('./controller/signupValidation');
 const saltRounds = 10;
+const { signUpSchema, idCheckSchema, nicknameSchema } = require('./joi');
+const { idCheck, nicknameCheck } = require('./controller/Check');
+const { signup } = require('../services/signup');
 
 //회원가입
-router.post('/signup', async (req, res, next) => {
-  const { nickname, userId, password, passwordCheck } = req.body;
-  const today = new Date();
-  const year = today.getFullYear();
-  const month = today.getMonth() + 1;
-  const day = today.getDate();
-  const date = `${year}-${month}-${day}`;
-  if (
-    idValidation(userId) &&
-    passwordValidation(userId, password, passwordCheck)
-  ) {
-    const encryptedPassword = await bcrypt.hash(password, saltRounds);
-    const userExist = await User.findOne({
-      where: {
-        userId,
-        password: encryptedPassword,
-      },
-    });
-    try {
-      if (!userExist) {
-        await User.create({
-          nickname,
-          userId,
-          password: encryptedPassword,
-          date,
-        });
-        res.status(200).json({});
-      } else if (userExist) {
-        res.status(400).json({
-          errorMessage: '중복아이디입니다.',
-        });
-      }
-    } catch (err) {
-      console.error(err);
-    }
-  } else {
-    res.status(400).json({
-      errorMessage: 'validation Error',
-    });
-  }
-});
+router.post('/signup', signup);
 
 //id중복체크
-router.post('/signup/idCheck', async (req, res, next) => {
-  const { userId } = req.body;
-  const userExist = await User.findOne({
-    where: {
-      userId,
-    },
-  });
-  try {
-    if (!userExist) {
-      res.status(200).json({});
-    } else {
-      res.status(400).json({});
-    }
-  } catch (err) {
-    console.error(err);
-  }
-});
+router.post('/signup/idCheck', idCheck);
 
 //닉네임 중복체크
-router.post('/signup/nickCheck', async (req, res, next) => {
-  const { nickname } = req.body;
-  const userExist = await User.findOne({
-    where: {
-      nickname,
-    },
-  });
-  try {
-    if (!userExist) {
-      res.status(200).json({});
-    } else {
-      res.status(400).json({});
-    }
-  } catch (err) {
-    console.error(err);
-  }
-});
+router.post('/signup/nickCheck', nicknameCheck);
 
 //로그인
 router.post('/login', async (req, res) => {
   const { userId, password } = await postLoginSchema.validateAsync(req.body);
-  const user = await Users.findOne({
+  const user = await User.findOne({
     where: { userId, password },
   });
   if (!user) {

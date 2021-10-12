@@ -20,4 +20,10 @@ module.exports = {
       .pattern(/^[a-zA-Z0-9!@#$%^&*]{6,18}$/),
     passwordCheck: Joi.ref('password'),
   }),
+  idCheckSchema: Joi.object({
+    userId: this.signUpSchema.userId,
+  }),
+  nicknameSchema: Joi.object({
+    nickname: this.signUpSchema.nickname,
+  }),
 };

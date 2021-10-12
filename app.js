@@ -6,6 +6,7 @@ const morgan = require('morgan');
 const cookieParser = require('cookie-parser');
 const { sequelize } = require('./models/index');
 const cors = require('cors');
+const helmet = require('helmet');
 
 //sequelize 초기화
 sequelize
@@ -18,6 +19,9 @@ app.use(morgan('dev'));
 
 //cors
 app.use(cors());
+
+//helmet(보안)
+app.use(helmet());
 
 //routing
 const router = require('./routers/index');

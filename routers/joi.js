@@ -19,5 +19,11 @@ module.exports = {
       .max(18)
       .pattern(/^[a-zA-Z0-9!@#$%^&*]{6,18}$/),
     passwordCheck: Joi.ref('password'),
+    postLoginSchema: Joi.object ({
+      userId: Joi.string()
+      .required(),
+      password: Joi.string()
+      .required(),
+    })
   }),
 };

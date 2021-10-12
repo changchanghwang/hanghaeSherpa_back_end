@@ -21,9 +21,17 @@ module.exports = {
     passwordCheck: Joi.ref('password'),
   }),
   idCheckSchema: Joi.object({
-    userId: this.signUpSchema.userId,
+    userId: Joi.string()
+      .required()
+      .min(4)
+      .max(12)
+      .pattern(/^[a-zA-Z0-9!@#$%^&*]{4,12}$/),
   }),
   nicknameSchema: Joi.object({
-    nickname: this.signUpSchema.nickname,
+    nickname: Joi.string()
+      .required()
+      .min(1)
+      .max(10)
+      .pattern(/^[a-zA-Z0-9가-힣]{1,10}$/),
   }),
 };

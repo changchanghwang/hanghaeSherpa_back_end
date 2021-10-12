@@ -8,7 +8,7 @@ const {
 } = require('./controller/signupValidation');
 const saltRounds = 10;
 const { signUpSchema, idCheckSchema, nicknameSchema } = require('./joi');
-const { idCheck, nicknameCheck } = require('./controller/Check');
+const { idCheck, nicknameCheck } = require('./controller/Checks');
 const { signup } = require('../services/signup');
 
 //회원가입

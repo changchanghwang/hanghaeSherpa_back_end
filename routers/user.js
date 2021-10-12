@@ -49,8 +49,11 @@ router.post('/signup', async (req, res, next) => {
     });
   }
 });
+<<<<<<< HEAD
 
 //중복체크
+=======
+>>>>>>> 7922e5c260be2a4c5cd08bb663a8b2194b5b0966
 router.post('/signup/dup', async (req, res, next) => {
   const { userId } = req.body;
   const userExist = await User.findOne({

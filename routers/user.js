@@ -12,7 +12,7 @@ router.post('/signup', async (req, res, next) => {
   const { nickname, userId, password, passwordCheck } = req.body;
   const today = new Date();
   const year = today.getFullYear();
-  const month = today.getMonth();
+  const month = today.getMonth() + 1;
   const day = today.getDate();
   const date = `${year}-${month}-${day}`;
   if (
@@ -20,14 +20,12 @@ router.post('/signup', async (req, res, next) => {
     passwordValidation(userId, password, passwordCheck)
   ) {
     const encryptedPassword = await bcrypt.hash(password, saltRounds);
-    console.log(encryptedPassword);
     const userExist = await User.findOne({
       where: {
         userId,
         password: encryptedPassword,
       },
     });
-    console.log('2');
     try {
       if (!userExist) {
         await User.create({
@@ -36,7 +34,6 @@ router.post('/signup', async (req, res, next) => {
           password: encryptedPassword,
           date,
         });
-        console.log('3');
         res.status(200).json({});
       } else if (userExist) {
         res.status(400).json({
@@ -52,8 +49,23 @@ router.post('/signup', async (req, res, next) => {
     });
   }
 });
-
-
+router.post('/signup/dup', async (req, res, next) => {
+  const { userId } = req.body;
+  const userExist = await User.findOne({
+    where: {
+      userId,
+    },
+  });
+  try {
+    if (!userExist) {
+      res.status(200).json({});
+    } else {
+      res.status(400).json({});
+    }
+  } catch (err) {
+    console.error(err);
+  }
+});
 
 //로그인
 router.post('/login', async (req, res) => {
@@ -73,6 +85,5 @@ router.post('/login', async (req, res) => {
   });
   res.status(200).json({});
 });
-
 
 module.exports = router;

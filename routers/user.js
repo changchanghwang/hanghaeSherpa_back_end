@@ -3,6 +3,7 @@ const router = express.Router();
 const { User } = require('../models');
 const { idCheck, nicknameCheck } = require('./controllers/Checks');
 const { signup } = require('../services/signup');
+const { postLoginSchema } = require('./joi');
 
 //회원가입
 router.post('/signup', signup);

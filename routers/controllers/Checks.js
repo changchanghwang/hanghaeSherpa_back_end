@@ -1,4 +1,4 @@
-const { idCheckSchema } = require('../joi');
+const { idCheckSchema, nicknameSchema } = require('../joi');
 
 module.exports = {
   //아이디 중복체크

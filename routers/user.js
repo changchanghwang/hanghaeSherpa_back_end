@@ -49,6 +49,8 @@ router.post('/signup', async (req, res, next) => {
     });
   }
 });
+
+//중복체크
 router.post('/signup/dup', async (req, res, next) => {
   const { userId } = req.body;
   const userExist = await User.findOne({
@@ -70,20 +72,20 @@ router.post('/signup/dup', async (req, res, next) => {
 //로그인
 router.post('/login', async (req, res) => {
   const { userId, password } = await postLoginSchema.validateAsync(req.body);
-  const user = await Users.findOne({
+  const user = await User.findOne({
     where: { userId, password },
   });
   if (!user) {
     res.status(400).send({});
     return;
   }
-  const token = jwt.sign({ userId: user.userId }, process.env.SECRET_KEY);
+  const token = jwt.sign({ userId }, process.env.SECRET_KEY);
   console.log(token);
   res.cookie('user', token, {
     maxAge: 50 * 60 * 1000,
     httpOnly: true,
   });
-  res.status(200).json({});
+  res.status(200).json({ nickname });
 });
 
 module.exports = router;

@@ -1,15 +1,17 @@
 {
   "name": "hanghaesherpa_back_end",
   "version": "1.0.0",
-  "description": "",
+  "description": "다른 사람과의 비교는 필요 없다! 오로지 과거의 나와 비교해서 내가 얼마나 성장했는지, 목표치를 잘 유지하는지를 산 모양의 그래프로 볼 수 있는 항해라는 산의 등산 도우미, 셰르파를 소개합니다.",
   "main": "app.js",
   "dependencies": {
     "bcrypt": "^5.0.1",
     "cookie-parser": "^1.4.5",
+    "cors": "^2.8.5",
     "dotenv": "^10.0.0",
     "express": "^4.17.1",
     "joi": "^17.4.2",
     "jsonwebtoken": "^8.5.1",
+    "moment": "^2.29.1",
     "morgan": "^1.10.0",
     "mysql2": "^2.3.0",
     "prettier": "^2.4.1",
@@ -22,7 +24,8 @@
   },
   "scripts": {
     "prettify": "prettier --write *.js **/*.js",
-    "test": "jest"
+    "test": "jest",
+    "start": "node server.js"
   },
   "repository": {
     "type": "git",
@@ -33,5 +36,6 @@
   "bugs": {
     "url": "https://github.com/changchanghwang/hanghaeSherpa_back_end/issues"
   },
-  "homepage": "https://github.com/changchanghwang/hanghaeSherpa_back_end#readme"
+  "homepage": "https://github.com/changchanghwang/hanghaeSherpa_back_end#readme",
+  "keywords": []
 }

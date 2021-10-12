@@ -28,7 +28,7 @@ router.post('/login', async (req, res) => {
     maxAge: 50 * 60 * 1000,
     httpOnly: true,
   });
-  res.status(200).json({});
+  res.status(200).json({ nickname });
 });
 
 module.exports = router;

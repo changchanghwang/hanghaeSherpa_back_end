@@ -19,8 +19,8 @@ module.exports = async (req, res, next) => {
       console.log('로컬 유저는?', res.locals.user);
 
       next();
-    } catch (error) {
-       res.status(400).send({});
+    } catch (err) {
+      console.error(err);
     }
   }
 };

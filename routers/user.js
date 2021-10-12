@@ -1,73 +1,17 @@
 const express = require('express');
 const router = express.Router();
 const { User } = require('../models');
-const bcrypt = require('bcrypt');
-const {
-  idValidation,
-  passwordValidation,
-} = require('./controller/signupValidation');
-const saltRounds = 10;
+const { idCheck, nicknameCheck } = require('./controllers/Checks');
+const { signup } = require('../services/signup');
 
-router.post('/signup', async (req, res, next) => {
-  const { nickname, userId, password, passwordCheck } = req.body;
-  const today = new Date();
-  const year = today.getFullYear();
-  const month = today.getMonth() + 1;
-  const day = today.getDate();
-  const date = `${year}-${month}-${day}`;
-  if (
-    idValidation(userId) &&
-    passwordValidation(userId, password, passwordCheck)
-  ) {
-    const encryptedPassword = await bcrypt.hash(password, saltRounds);
-    const userExist = await User.findOne({
-      where: {
-        userId,
-        password: encryptedPassword,
-      },
-    });
-    try {
-      if (!userExist) {
-        await User.create({
-          nickname,
-          userId,
-          password: encryptedPassword,
-          date,
-        });
-        res.status(200).json({});
-      } else if (userExist) {
-        res.status(400).json({
-          errorMessage: '중복아이디입니다.',
-        });
-      }
-    } catch (err) {
-      console.error(err);
-    }
-  } else {
-    res.status(400).json({
-      errorMessage: 'validation Error',
-    });
-  }
-});
+//회원가입
+router.post('/signup', signup);
 
-//중복체크
-router.post('/signup/dup', async (req, res, next) => {
-  const { userId } = req.body;
-  const userExist = await User.findOne({
-    where: {
-      userId,
-    },
-  });
-  try {
-    if (!userExist) {
-      res.status(200).json({});
-    } else {
-      res.status(400).json({});
-    }
-  } catch (err) {
-    console.error(err);
-  }
-});
+//id중복체크
+router.post('/signup/idCheck', idCheck);
+
+//닉네임 중복체크
+router.post('/signup/nickCheck', nicknameCheck);
 
 //로그인
 router.post('/login', async (req, res) => {
@@ -76,8 +20,7 @@ router.post('/login', async (req, res) => {
     where: { userId, password },
   });
   if (!user) {
-    res.status(400).send({});
-    return;
+    return res.status(400).send({});
   }
   const token = jwt.sign({ userId }, process.env.SECRET_KEY);
   console.log(token);

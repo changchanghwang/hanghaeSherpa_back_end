@@ -20,7 +20,7 @@ module.exports = async (req, res, next) => {
 
       next();
     } catch (error) {
-      res.status(400).send({});
+       res.status(400).send({});
     }
   }
 };

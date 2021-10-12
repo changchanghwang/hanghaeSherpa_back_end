@@ -8,6 +8,7 @@ const {
 } = require('./controller/signupValidation');
 const saltRounds = 10;
 
+//회원가입
 router.post('/signup', async (req, res, next) => {
   const { nickname, userId, password, passwordCheck } = req.body;
   const today = new Date();
@@ -49,11 +50,32 @@ router.post('/signup', async (req, res, next) => {
     });
   }
 });
-router.post('/signup/dup', async (req, res, next) => {
+
+//id중복체크
+router.post('/signup/idCheck', async (req, res, next) => {
   const { userId } = req.body;
   const userExist = await User.findOne({
     where: {
       userId,
+    },
+  });
+  try {
+    if (!userExist) {
+      res.status(200).json({});
+    } else {
+      res.status(400).json({});
+    }
+  } catch (err) {
+    console.error(err);
+  }
+});
+
+//닉네임 중복체크
+router.post('/signup/nickCheck', async (req, res, next) => {
+  const { nickname } = req.body;
+  const userExist = await User.findOne({
+    where: {
+      nickname,
     },
   });
   try {

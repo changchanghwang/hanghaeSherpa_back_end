@@ -29,6 +29,9 @@
 실시간 통신 웹소켓 지양
 
 database: mysql (sequelize)
+ - database 사용시 규칙
+    -   table 사용의 첫 스펠링은 대문자로 사용하기 ex) User.findOne
+    -   table 이름은 복수형으로 ex)todos, users ...
 
 ## 와이어 프레임
 

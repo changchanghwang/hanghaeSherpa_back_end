@@ -77,4 +77,22 @@ router.get('/view/:date', loginAuth, async (req, res, next) => {
   res.status(200).json({ todo, yesterdayTodo });
 });
 
+router.post('/post', loginAuth, async (req, res) => {
+  const user = res.locals.user;
+  const { date } = req.params;
+  const { perfection, creativity, difficulty, concentration, satisfacation } =
+    req.body;
+  await Posts.create({
+    user,
+    date,
+    perfection,
+    creativity,
+    difficulty,
+    concentration,
+    satisfacation,
+  });
+  res.status(200).json({});
+  return;
+});
+
 module.exports = router;

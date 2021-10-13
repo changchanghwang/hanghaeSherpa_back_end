@@ -1,6 +1,6 @@
 const {
   passwordValidation,
-} = require('../routers/controller/signupValidation');
+} = require('../routers/controllers/signupValidation');
 
 test(`비밀번호를 입력했을때 
         1. password와 passwordCheck가 일치할 때,

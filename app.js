@@ -25,6 +25,7 @@ app.use(helmet());
 
 //routing
 const router = require('./routers/index');
+const { errorHandler } = require('./middleWares/errorHandler');
 
 //parser
 app.use(express.urlencoded({ extended: false }));
@@ -34,5 +35,8 @@ app.use(cookieParser());
 
 //routing
 app.use('/', router);
+
+//errorHandler
+app.use(errorHandler);
 
 module.exports = http;

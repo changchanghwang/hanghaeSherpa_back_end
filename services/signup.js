@@ -1,12 +1,11 @@
 const { signUpSchema } = require('../routers/joi');
-const moment = require('moment');
 const {
-  idValidation,
   passwordValidation,
 } = require('../routers/controllers/signupValidation');
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
 const { User } = require('../models');
+const moment = require('moment');
 
 module.exports = {
   signup: async (req, res, next) => {
@@ -16,10 +15,7 @@ module.exports = {
     //년,월,일을 원하는 format으로 가공
     const date = moment().format('YYYY-MM-DD');
     //idValidation과 passwordValidation에 성공한다면 둘다 true를 반환
-    if (
-      idValidation(userId) &&
-      passwordValidation(userId, password, passwordCheck)
-    ) {
+    if (passwordValidation(userId, password, passwordCheck)) {
       //비밀번호 암호화
       const encryptedPassword = await bcrypt.hash(password, saltRounds);
       //user가 있는지 찾아봄

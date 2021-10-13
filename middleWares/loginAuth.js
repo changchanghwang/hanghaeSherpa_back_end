@@ -14,7 +14,7 @@ module.exports = async (req, res, next) => {
         where: { userId: decoded.userId },
       });
 
-      res.locals.user = user.userId;
+      res.locals.user = user.id;
 
       console.log('로컬 유저는?', res.locals.user);
 

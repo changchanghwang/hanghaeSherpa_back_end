@@ -6,6 +6,7 @@ const morgan = require('morgan');
 const cookieParser = require('cookie-parser');
 const { sequelize } = require('./models/index');
 const cors = require('cors');
+const helmet = require('helmet');
 
 //sequelize 초기화
 sequelize
@@ -19,8 +20,12 @@ app.use(morgan('dev'));
 //cors
 app.use(cors());
 
+//helmet(보안)
+app.use(helmet());
+
 //routing
 const router = require('./routers/index');
+const { errorHandler } = require('./middleWares/errorHandler');
 
 //parser
 app.use(express.urlencoded({ extended: false }));
@@ -30,5 +35,8 @@ app.use(cookieParser());
 
 //routing
 app.use('/', router);
+
+//errorHandler
+app.use(errorHandler);
 
 module.exports = http;

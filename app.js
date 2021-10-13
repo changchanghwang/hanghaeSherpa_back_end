@@ -18,7 +18,12 @@ sequelize
 app.use(morgan('dev'));
 
 //cors
-app.use(cors());
+app.use(
+  cors({
+    origin: true,
+    credentials: true,
+  })
+);
 
 //helmet(보안)
 app.use(helmet());

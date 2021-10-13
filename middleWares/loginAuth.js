@@ -3,7 +3,7 @@ const { User } = require('../models');
 
 module.exports = async (req, res, next) => {
   const cookie = req.cookies.user;
-
+  console.log(cookie);
   if (cookie === undefined) {
     res.status(401).send({});
   } else {

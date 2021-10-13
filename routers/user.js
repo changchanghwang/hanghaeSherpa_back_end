@@ -27,12 +27,8 @@ router.post('/login', async (req, res) => {
     return res.status(400).send({});
   }
   const token = jwt.sign({ userId }, process.env.SECRET_KEY);
-  res.cookie('user', token, {
-    maxAge: 50 * 60 * 1000,
-    httpOnly: true,
-  });
   const nickname = user.nickname;
-  res.status(200).json({ nickname });
+  res.status(200).json({ nickname, token });
 });
 
 module.exports = router;

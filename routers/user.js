@@ -13,7 +13,6 @@ router.post('/signup/idCheck', idCheck);
 
 //닉네임 중복체크
 router.post('/signup/nickCheck', nicknameCheck);
-//gg
 //로그인
 router.post('/login', async (req, res) => {
   const { userId, password } = await postLoginSchema.validateAsync(req.body);

@@ -4,7 +4,7 @@ const { Todo } = require('../models');
 const loginAuth = require('../middleWares/loginAuth');
 const moment = require('moment');
 
-router.get('/view/:date', loginAuth, async (req, res, next) => {
+router.get('/view', loginAuth, async (req, res, next) => {
   const { date } = req.params; //2021-10-13
   const days = date.slice('-');
   const day = Number(days['2']) - 1;

@@ -13,7 +13,7 @@ module.exports = {
       if (!userExist) {
         res.status(200).json({});
       } else {
-        res.status(400).json({});
+        res.status(400).json({ errorMessage: '중복아이디입니다.' });
       }
     } catch (err) {
       console.error(err);
@@ -31,7 +31,7 @@ module.exports = {
       if (!userExist) {
         res.status(200).json({});
       } else {
-        res.status(400).json({});
+        res.status(400).json({ errorMessage: '중복닉네임입니다.' });
       }
     } catch (err) {
       console.error(err);

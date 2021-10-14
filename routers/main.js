@@ -5,25 +5,29 @@ const loginAuth = require('../middleWares/loginAuth');
 const moment = require('moment');
 
 router.get('/view', loginAuth, async (req, res, next) => {
-  const { date } = req.params; //2021-10-13
-  const days = date.slice('-');
-  const day = Number(days['2']) - 1;
-  const yesterday = `${days[0]}-${days[1]}-${day}`;
+  // const { date } = req.params; //2021-10-13
+  // const days = date.split('-');
+  // const day = Number(days['2']) - 1;
+  // const yesterday = `${days[0]}-${days[1]}-${day}`;
   const user = res.locals.user;
+  const date = '2021-10-14';
+  const yesterday = '2021-10-13';
   const todos = await Todo.findOne({
     where: {
       date,
       user,
     },
   });
+  console.log(todos);
   const yesterdayTodos = await Todo.findOne({
     where: {
-      yesterday,
+      date: yesterday,
       user,
     },
   });
+  console.log(yesterdayTodos);
   const todo = {
-    id: todos.userId,
+    id: todos.user,
     date: todos.date,
     data: [
       {
@@ -49,7 +53,7 @@ router.get('/view', loginAuth, async (req, res, next) => {
     ],
   };
   const yesterdayTodo = {
-    id: yesterdayTodo.userId,
+    id: yesterdayTodos.user,
     date: yesterdayTodos.date,
     data: [
       {
@@ -74,7 +78,7 @@ router.get('/view', loginAuth, async (req, res, next) => {
       },
     ],
   };
-
+  console.log(todo, yesterdayTodo);
   res.status(200).json({ todo, yesterdayTodo });
 });
 

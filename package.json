@@ -19,7 +19,8 @@
     "passport": "^0.5.0",
     "passport-github": "^1.1.0",
     "prettier": "^2.4.1",
-    "sequelize": "^6.7.0"
+    "sequelize": "^6.7.0",
+    "supertest": "^6.1.6"
   },
   "devDependencies": {
     "jest": "^27.2.5",

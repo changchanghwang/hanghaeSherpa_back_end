@@ -71,7 +71,11 @@ exports.mainView = async (req, res, next) => {
         },
       ],
     };
-    res.status(200).json({ todo, yesterdayTodo });
+    return res.status(200).json({ todo, yesterdayTodo });
+  } else if (!todos && !yesterdayTodos) {
+    return res.status(400).json({
+      msg: '데이터가 없습니다.',
+    });
   } else if (!yesterdayTodos) {
     const todo = {
       id: todos.user,
@@ -128,7 +132,7 @@ exports.mainView = async (req, res, next) => {
         },
       ],
     };
-    res.status(200).json({ todo, yesterdayTodo });
+    return res.status(200).json({ todo, yesterdayTodo });
   } else if (!todos) {
     const todo = {
       id: yesterdayTodos.user,
@@ -182,10 +186,6 @@ exports.mainView = async (req, res, next) => {
         },
       ],
     };
-    res.status(200).json({ todo, yesterdayTodo });
-  } else {
-    res.status(400).json({
-      msg: '데이터가 없습니다.',
-    });
+    return res.status(200).json({ todo, yesterdayTodo });
   }
 };

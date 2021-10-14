@@ -9,7 +9,8 @@ router.get('/view/:date', loginAuth, mainView);
 
 router.post('/post/:date', loginAuth, async (req, res, next) => {
   const user = res.locals.user;
-  const date = req.params;
+  const { date } = req.params;
+  console.log(date);
   const todayDate = moment().format('YYYY-MM-DD');
   if (date !== todayDate) {
     return res.status(400).json({

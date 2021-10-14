@@ -21,7 +21,7 @@ test('signupSchema: userId가 영어 대소문자,숫자,특수문자(!@#$%^&*)�
   ).rejects.toThrowError();
   await expect(
     schema.signUpSchema.validateAsync({
-      userId: '안녕하세요',
+      userId: '<script></script>',
       nickname: clearData.nickname,
       password: clearData.password,
       passwordCheck: clearData.passwordCheck,

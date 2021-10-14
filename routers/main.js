@@ -7,9 +7,15 @@ const { mainView } = require('../services/mainView');
 
 router.get('/view/:date', loginAuth, mainView);
 
-router.post('/post', loginAuth, async (req, res, next) => {
+router.post('/post/:date', loginAuth, async (req, res, next) => {
   const user = res.locals.user;
-  const date = moment().format('YYYY-MM-DD');
+  const date = req.params;
+  const todayDate = moment().format('YYYY-MM-DD');
+  if (date !== todayDate) {
+    return res.status(400).json({
+      msg: '현재 날짜와 다른 경우 등록할 수 없습니다.',
+    });
+  }
   const { perfection, creativity, difficulty, concentration, satisfaction } =
     req.body;
   try {

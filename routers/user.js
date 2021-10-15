@@ -23,12 +23,13 @@ router.post('/login', async (req, res) => {
   const user = await User.findOne({
     where: { userId },
   });
-  if (!bcrypt.compareSync(password, user.password)) {
+  if (!bcrypt.compare(password, user.password)) {
     return res.status(400).send({});
+  } else {
+    const token = jwt.sign({ userId }, process.env.SECRET_KEY);
+    const nickname = user.nickname;
+    res.status(200).json({ nickname, token });
   }
-  const token = jwt.sign({ userId }, process.env.SECRET_KEY);
-  const nickname = user.nickname;
-  res.status(200).json({ nickname, token });
 });
 
 module.exports = router;

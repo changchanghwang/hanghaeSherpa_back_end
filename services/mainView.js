@@ -103,7 +103,7 @@ exports.mainView = async (req, res, next) => {
         },
       ],
     };
-    const [Year, Month, days] = todos.date.split['-'];
+    const [Year, Month, days] = todos.date.split('-');
     const yesterdate = String(Number(days) - 1);
     const dummydate = `${Year}-${Month}-${yesterdate}`;
     const yesterdayTodo = {

@@ -2,7 +2,7 @@
 
 <img src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FbkHzp7%2FbtrhTSkFWHl%2FGSfYQx3P6AQ6IOUN9eKBtk%2Fimg.jpg" style="width:400px">
 
-<img width="400px" src="https://user-images.githubusercontent.com/86486778/137579222-57adb34f-02be-4891-a68a-b7f4582bc93f.gif
+<img width="80%" src="https://user-images.githubusercontent.com/86486778/137579222-57adb34f-02be-4891-a68a-b7f4582bc93f.gif
 ">
 
 [동영상 보러가기](https://www.youtube.com/watch?v=vg4PxshvSmA)

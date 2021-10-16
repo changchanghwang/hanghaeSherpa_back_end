@@ -31,6 +31,7 @@
   "scripts": {
     "prettify": "prettier --write *.js **/*.js",
     "test": "jest",
+    "coverage": "jest --coverage",
     "start": "node server.js"
   },
   "repository": {

@@ -48,11 +48,5 @@ module.exports = class User extends Sequelize.Model {
       sourceKey: 'id',
       onDelte: 'CASCADE',
     });
-    //Percent와 1대 M의 관계중 1의 관계
-    db.User.hasMany(db.Percent, {
-      foreignKey: 'user',
-      sourceKey: 'id',
-      onDelte: 'CASCADE',
-    });
   }
 };

@@ -23,12 +23,12 @@ router.post('/login', async (req, res) => {
   const user = await User.findOne({
     where: { userId },
   });
-  if (!bcrypt.compare(password, user.password)) {
+  const compare = await bcrypt.compare(password, user.password);
+  if (!compare) {
     return res.status(400).send({});
   } else {
     const token = jwt.sign({ userId }, process.env.SECRET_KEY);
-    const nickname = user.nickname;
-    res.status(200).json({ nickname, token });
+    res.status(200).json({ token, msg: '로그인성공' });
   }
 });
 

@@ -73,8 +73,8 @@
 </div>
 
 ## API
-<img src="./readmeImg/api1.png" style="width:400px;">
-<img src="./readmeImg/api2.png" style="width:400px;">
+<img src="./readmeImg/api1.PNG" style="width:400px;">
+<img src="./readmeImg/api2.PNG" style="width:400px;">
 <img src="./readmeImg/api3.png" style="width:400px;">
 
 ## DB diagram

@@ -83,7 +83,7 @@ exports.mainView = async (req, res, next) => {
   }
   //해당날짜, 그 전날 데이터가 없을때
   else if (!todos && !yesterdayTodos) {
-    return res.status(204).json({
+    return res.status(200).json({
       msg: '데이터가 없습니다.',
       signupDate,
     });

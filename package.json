@@ -21,12 +21,15 @@
     "passport-github": "^1.1.0",
     "prettier": "^2.4.1",
     "sequelize": "^6.7.0",
-    "supertest": "^6.1.6"
+    "supertest": "^6.1.6",
+    "swagger-autogen": "^2.11.2"
   },
   "devDependencies": {
     "jest": "^27.2.5",
     "prettier": "^2.4.1",
-    "sequelize-cli": "^6.2.0"
+    "sequelize-cli": "^6.2.0",
+    "swagger-jsdoc": "^6.1.0",
+    "swagger-ui-express": "^4.1.6"
   },
   "scripts": {
     "prettify": "prettier --write *.js **/*.js",

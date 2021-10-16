@@ -1,4 +1,4 @@
-const Todo = require('../models/todos');
+const { Todo, User } = require('../models');
 
 exports.mainView = async (req, res, next) => {
   //파라미터로 날짜를 받음
@@ -9,6 +9,8 @@ exports.mainView = async (req, res, next) => {
   const yesterday = `${days[0]}-${days[1]}-${day}`;
   //미들웨어에서 userId를 받음
   const user = res.locals.user;
+  const users = await User.findOne({ where: { id: user } });
+  const signupDate = users.date;
   //받은 userId와 날짜로 해당유저의 그 날짜todo 데이터를 찾음
   const todos = await Todo.findOne({
     where: {
@@ -77,12 +79,13 @@ exports.mainView = async (req, res, next) => {
         },
       ],
     };
-    return res.status(200).json({ todo, yesterdayTodo });
+    return res.status(200).json({ todo, yesterdayTodo, signupDate });
   }
   //해당날짜, 그 전날 데이터가 없을때
   else if (!todos && !yesterdayTodos) {
     return res.status(204).json({
       msg: '데이터가 없습니다.',
+      signupDate,
     });
   }
   //그 전날 데이터가 없을때 전날데이터는 더미데이터로
@@ -142,7 +145,7 @@ exports.mainView = async (req, res, next) => {
         },
       ],
     };
-    return res.status(200).json({ todo, yesterdayTodo });
+    return res.status(200).json({ todo, yesterdayTodo, signupDate });
   }
   //그 해당날짜 데이터가 없을때 해당날짜데이터는 더미데이터로
   else if (!todos) {
@@ -198,6 +201,6 @@ exports.mainView = async (req, res, next) => {
         },
       ],
     };
-    return res.status(200).json({ todo, yesterdayTodo });
+    return res.status(200).json({ todo, yesterdayTodo, signupDate });
   }
 };

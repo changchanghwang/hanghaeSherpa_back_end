@@ -20,7 +20,8 @@ app.use(morgan('dev'));
 //cors
 app.use(
   cors({
-    origin: 'http://hanghaesherpa.s3-website.ap-northeast-2.amazonaws.com',
+    // origin: 'http://hanghaesherpa.s3-website.ap-northeast-2.amazonaws.com',
+    origin: true,
     credentials: true,
   })
 );

@@ -34,7 +34,7 @@ exports.signup = async (req, res, next) => {
           date,
         });
         //status 200 반환
-        return res.status(200).json();
+        return res.status(200).json({});
       }
       //유저가 있으면
       else {

@@ -31,7 +31,34 @@ router.get('/view', loginAuth, async (req, res, next) => {
   const todosM4 = await Todo.findOne({ where: { date: dayM4, user } });
   const todosM5 = await Todo.findOne({ where: { date: dayM5, user } });
   const todosM6 = await Todo.findOne({ where: { date: dayM6, user } });
-
+  let weekTodoArr = [
+    {
+      id: today,
+      data: [
+        {
+          x: '완성도',
+          y: 0,
+        },
+        {
+          x: '창의성',
+          y: 0,
+        },
+        {
+          x: '난이도',
+          y: 0,
+        },
+        {
+          x: '집중도',
+          y: 0,
+        },
+        {
+          x: '만족도',
+          y: 0,
+        },
+      ],
+    },
+  ];
+  let weekTodoNum = weekTodoArr.length;
   //일주일치 데이터중 아무것도 없을때
   if (
     !todosM0 &&
@@ -42,7 +69,7 @@ router.get('/view', loginAuth, async (req, res, next) => {
     !todosM5 &&
     !todosM6
   ) {
-    return res.status(400).json({});
+    return res.status(200).json({ weekTodoArr, weekTodoNum });
   }
 
   //데이터 정제 로직
@@ -55,7 +82,7 @@ router.get('/view', loginAuth, async (req, res, next) => {
     todosM5,
     todosM6,
   ];
-  const weekTodoArr = [];
+  weekTodoArr = [];
   //없는 데이터를 빼주고 있는데이터는 가공해서 새로운 배열에 push
   todoArr.filter((val, idx) => {
     if (todoArr[idx] !== null) {
@@ -87,7 +114,7 @@ router.get('/view', loginAuth, async (req, res, next) => {
     }
   });
   //몇개인지?
-  const weekTodoNum = weekTodoArr.length;
+  weekTodoNum = weekTodoArr.length;
   res.status(200).json({ weekTodoArr, weekTodoNum });
 });
 

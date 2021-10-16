@@ -83,7 +83,61 @@ exports.mainView = async (req, res, next) => {
   }
   //해당날짜, 그 전날 데이터가 없을때
   else if (!todos && !yesterdayTodos) {
+    const todo = {
+      id: user,
+      date: date,
+      data: [
+        {
+          x: '완성도',
+          y: 0,
+        },
+        {
+          x: '창의성',
+          y: 0,
+        },
+        {
+          x: '난이도',
+          y: 0,
+        },
+        {
+          x: '집중도',
+          y: 0,
+        },
+        {
+          x: '만족도',
+          y: 0,
+        },
+      ],
+    };
+    const yesterdayTodo = {
+      id: users.id,
+      date: yesterday,
+      data: [
+        {
+          x: '완성도',
+          y: 0,
+        },
+        {
+          x: '창의성',
+          y: 0,
+        },
+        {
+          x: '난이도',
+          y: 0,
+        },
+        {
+          x: '집중도',
+          y: 0,
+        },
+        {
+          x: '만족도',
+          y: 0,
+        },
+      ],
+    };
     return res.status(200).json({
+      todo,
+      yesterdayTodo,
       msg: '데이터가 없습니다.',
       signupDate,
     });

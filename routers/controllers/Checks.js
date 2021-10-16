@@ -12,7 +12,7 @@ module.exports = {
         },
       });
       if (!userExist) {
-        res.status(200).json({});
+        res.status(200).json({ msg: '아이디중복체크완료' });
       } else {
         res.status(400).json({ errorMessage: '중복아이디입니다.' });
       }
@@ -23,7 +23,7 @@ module.exports = {
   },
   //닉네임 중복체크
   nicknameCheck: async (req, res, next) => {
-    const { nickname } = nicknameSchema.validateAsync(req.body);
+    const { nickname } = await nicknameSchema.validateAsync(req.body);
     try {
       const userExist = await User.findOne({
         where: {
@@ -31,7 +31,7 @@ module.exports = {
         },
       });
       if (!userExist) {
-        res.status(200).json({});
+        res.status(200).json({ msg: '닉네임중복체크완료' });
       } else {
         res.status(400).json({ errorMessage: '중복닉네임입니다.' });
       }

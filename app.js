@@ -7,8 +7,8 @@ const cookieParser = require('cookie-parser');
 const { sequelize } = require('./models/index');
 const cors = require('cors');
 const helmet = require('helmet');
-const swaggerUi = require('swagger-ui-express')
-const swaggerFile = require('./swagger_output.json')
+const swaggerUi = require('swagger-ui-express');
+const swaggerFile = require('./swagger_output.json');
 
 //sequelize 초기화
 sequelize
@@ -22,7 +22,8 @@ app.use(morgan('dev'));
 //cors
 app.use(
   cors({
-    origin: true,
+    origin: 'http://hanghaesherpa.s3-website.ap-northeast-2.amazonaws.com',
+    // origin: true,
     credentials: true,
   })
 );
@@ -47,6 +48,6 @@ app.use('/', router);
 app.use(errorHandler);
 
 //swagger
-app.use('/swagger', swaggerUi.serve, swaggerUi.setup(swaggerFile))
+app.use('/swagger', swaggerUi.serve, swaggerUi.setup(swaggerFile));
 
 module.exports = http;

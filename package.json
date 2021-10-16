@@ -10,18 +10,14 @@
     "cors": "^2.8.5",
     "dotenv": "^10.0.0",
     "express": "^4.17.1",
-    "express-session": "^1.17.2",
     "helmet": "^4.6.0",
     "joi": "^17.4.2",
     "jsonwebtoken": "^8.5.1",
     "moment": "^2.29.1",
     "morgan": "^1.10.0",
     "mysql2": "^2.3.0",
-    "passport": "^0.5.0",
-    "passport-github": "^1.1.0",
     "prettier": "^2.4.1",
     "sequelize": "^6.7.0",
-    "supertest": "^6.1.6",
     "swagger-autogen": "^2.11.2"
   },
   "devDependencies": {
@@ -34,6 +30,7 @@
   "scripts": {
     "prettify": "prettier --write *.js **/*.js",
     "test": "jest",
+    "coverage": "jest --coverage",
     "start": "node server.js"
   },
   "repository": {

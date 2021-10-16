@@ -73,3 +73,26 @@ test('db에서 에러가 발생하면 next(err) 호출', async () => {
   await signup(req, res, next);
   expect(next).toBeCalledWith(err);
 });
+test('회원가입을 할 때 validation에 실패하면 response.status로 400을 반환하고 errorMessage:validation Error를 반환', async () => {
+  const nickname = 'asdf';
+  const userId = 'asdf';
+  const password = 'asdf1234';
+  const passwordCheck = 'asdf1234';
+  const req = {
+    body: {
+      nickname,
+      userId,
+      password,
+      passwordCheck,
+    },
+  };
+  const res = {
+    status: jest.fn(() => res),
+    json: jest.fn(),
+  };
+  const next = jest.fn();
+  User.findOne.mockReturnValue(Promise.resolve(true));
+  await signup(req, res, next);
+  expect(res.status).toBeCalledWith(400);
+  expect(res.json).toBeCalledWith({ errorMessage: 'validation Error' });
+});

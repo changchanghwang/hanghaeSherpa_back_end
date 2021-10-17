@@ -5,7 +5,7 @@ exports.mainView = async (req, res, next) => {
   //파라미터로 날짜를 받음
   const { date } = req.params; // 2021-10-14
   //어제날짜 만드는 로직
-  let yesterday = moment(date).subtract(1, 'day').format('YYYY-MM-DD');
+  const yesterday = moment(date).subtract(1, 'day').format('YYYY-MM-DD');
   // console.log(yesterday);
   // const days = date.split('-'); //20211014
   // day = String(Number(days['2']) - 1); //1일일때는??? //"14" 14-1 "13"

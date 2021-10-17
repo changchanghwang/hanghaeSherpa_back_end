@@ -15,7 +15,6 @@ router.get('/view', loginAuth, async (req, res, next) => {
     const dayMinus = moment(today).subtract(i, 'day').format('YYYY-MM-DD');
     day.push(dayMinus);
   }
-  console.log(day);
   const dayM1 = `${day[1]}`;
   const dayM2 = `${day[2]}`;
   const dayM3 = `${day[3]}`;
@@ -82,37 +81,67 @@ router.get('/view', loginAuth, async (req, res, next) => {
     todosM5,
     todosM6,
   ];
-  weekTodoArr = [];
-  //없는 데이터를 빼주고 있는데이터는 가공해서 새로운 배열에 push
-  todoArr.filter((val, idx) => {
-    if (todoArr[idx] !== null) {
-      return weekTodoArr.push({
-        id: todoArr[idx].date,
+  weekTodoArr = todoArr.reduce((prev, cur) => {
+    if (cur !== null) {
+      prev.push({
+        id: cur.date,
         data: [
           {
             x: '완성도',
-            y: todoArr[idx].perfection,
+            y: cur.perfection,
           },
           {
             x: '창의성',
-            y: todoArr[idx].creativity,
+            y: cur.creativity,
           },
           {
             x: '난이도',
-            y: todoArr[idx].difficulty,
+            y: cur.difficulty,
           },
           {
             x: '집중도',
-            y: todoArr[idx].concentration,
+            y: cur.concentration,
           },
           {
             x: '만족도',
-            y: todoArr[idx].satisfaction,
+            y: cur.satisfaction,
           },
         ],
       });
     }
-  });
+    return prev;
+  }, []);
+  // weekTodoArr = [];
+  // 없는 데이터를 빼주고 있는데이터는 가공해서 새로운 배열에 push
+  // todoArr.filter((val, idx) => {
+  //   if (todoArr[idx] !== null) {
+  //     return weekTodoArr.push({
+  //       id: todoArr[idx].date,
+  //       data: [
+  //         {
+  //           x: '완성도',
+  //           y: todoArr[idx].perfection,
+  //         },
+  //         {
+  //           x: '창의성',
+  //           y: todoArr[idx].creativity,
+  //         },
+  //         {
+  //           x: '난이도',
+  //           y: todoArr[idx].difficulty,
+  //         },
+  //         {
+  //           x: '집중도',
+  //           y: todoArr[idx].concentration,
+  //         },
+  //         {
+  //           x: '만족도',
+  //           y: todoArr[idx].satisfaction,
+  //         },
+  //       ],
+  //     });
+  //   }
+  // });
   //몇개인지?
   weekTodoNum = weekTodoArr.length;
   res.status(200).json({ weekTodoArr, weekTodoNum });

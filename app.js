@@ -44,10 +44,10 @@ app.use(cookieParser());
 //routing
 app.use('/', router);
 
-//errorHandler
-app.use(errorHandler);
-
 //swagger
 app.use('/swagger', swaggerUi.serve, swaggerUi.setup(swaggerFile));
+
+//errorHandler
+app.use(errorHandler);
 
 module.exports = http;

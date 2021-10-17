@@ -10,18 +10,18 @@ router.get('/view', loginAuth, async (req, res, next) => {
   //로그인 인증을 통해 해당유저를 찾음
   const user = res.locals.user;
   //일주일치 날짜를 뽑는 로직
-  const [year, month, days] = today.split('-');
   const day = [];
   for (let i = 0; i < 7; i++) {
-    const dayMinus = String(Number(days) - i);
+    const dayMinus = moment(today).subtract(i, 'day').format('YYYY-MM-DD');
     day.push(dayMinus);
   }
-  const dayM1 = `${year}-${month}-${day[1]}`;
-  const dayM2 = `${year}-${month}-${day[2]}`;
-  const dayM3 = `${year}-${month}-${day[3]}`;
-  const dayM4 = `${year}-${month}-${day[4]}`;
-  const dayM5 = `${year}-${month}-${day[5]}`;
-  const dayM6 = `${year}-${month}-${day[6]}`;
+  console.log(day);
+  const dayM1 = `${day[1]}`;
+  const dayM2 = `${day[2]}`;
+  const dayM3 = `${day[3]}`;
+  const dayM4 = `${day[4]}`;
+  const dayM5 = `${day[5]}`;
+  const dayM6 = `${day[6]}`;
 
   //일주일치 데이터를 찾아봄
   const todosM0 = await Todo.findOne({ where: { date: today, user } });

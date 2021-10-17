@@ -1,12 +1,15 @@
 const { Todo, User } = require('../models');
+const moment = require('moment');
 
 exports.mainView = async (req, res, next) => {
   //파라미터로 날짜를 받음
-  const { date } = req.params;
+  const { date } = req.params; // 2021-10-14
   //어제날짜 만드는 로직
-  const days = date.split('-');
-  const day = String(Number(days['2']) - 1);
-  const yesterday = `${days[0]}-${days[1]}-${day}`;
+  let yesterday = moment(date).subtract(1, 'day').format('YYYY-MM-DD');
+  // console.log(yesterday);
+  // const days = date.split('-'); //20211014
+  // day = String(Number(days['2']) - 1); //1일일때는??? //"14" 14-1 "13"
+  // const yesterday = `${days[0]}-${days[1]}-${day}`;
   //미들웨어에서 userId를 받음
   const user = res.locals.user;
   const users = await User.findOne({ where: { id: user } });
